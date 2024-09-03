@@ -6,9 +6,38 @@ Created on Mon Sep  2 21:35:02 2024
 @author: alvaro
 """
 
-from desitter_bruno import *
+from desitter import *
 
 diff = 0.000001
+
+
+def overall2(z_list, EA, DH, n, l, r):
+
+    return np.cos(np.pi * z_list / (2 * DH)) ** 4 / (n**2 + l**2 + r**2)**0.25 * np.exp(-z_list) / Lzero
+
+def real1(z_list, EA, DH, n, l, r):
+
+    return np.cos(z_list * EA) * np.cos(2 * np.pi * np.exp(-z_list) * (n**2 + l**2 + r**2)**0.5 / Lzero )
+
+def real2(z_list, EA, DH, n, l, r):
+
+    return np.sin(z_list * EA) * np.sin(2 * np.pi * np.exp(-z_list) / Lzero * (n**2 + l**2 + r**2)**0.5)
+
+def imag1(z_list, EA, DH, n, l, r):
+
+    return np.cos(z_list * EA) * np.sin(2 * np.pi * np.exp(-z_list) / Lzero * (n**2 + l**2 + r**2)**0.5)
+
+def imag2(z_list, EA, DH, n, l, r):
+
+    return np.sin(z_list * EA) * np.cos(2 * np.pi * np.exp(-z_list) / Lzero * (n**2 + l**2 + r**2)**0.5)
+
+def integration_real2(z_list, EA, DH, n, l, r):
+
+    return cumtrapz(overall2(z_list, EA, DH, n, l, r) * (real1(z_list, EA, DH, n, l, r) + real2(z_list, EA, DH, n, l, r) ), z_list)[-1]
+
+def integration_imag2(z_list, EA, DH, n, l, r):
+
+    return cumtrapz(overall2(z_list, EA, DH, n, l, r) * (imag1(z_list, EA, DH, n, l, r) - imag2(z_list, EA, DH, n, l, r) ), z_list)[-1]
 
 
 def test_calculate_array1():

@@ -96,37 +96,6 @@ def calculate_single(*, z_list, EA, DH, N, L, R):
     
     return result
 
-def function_to_integrate():
-
-    np.cos(np.pi * z_list / (2 * DH)) ** 4 / (n**2 + l**2 + r**2)**0.25 * np.exp(-z_list) / Lzero * (np.cos(z_list * EA) * cos(2 * np.pi * np.exp(-z_list) * (n**2 + l**2 + r**2)**0.5 / Lzero ) + np.sin(z_list * EA) * np.sin(2 * np.pi * exp(-z_list) * (n**2 + l**2 + r**2)**0.5) + 1j * (np.cos(z_list * EA) * np.sin(2 * np.pi * np.exp(-z_list) / Lzero * (n**2 + l**2 + r**2)**0.5) - np.sin(z_list * EA) * np.cos(2 * np.pi * np.exp(-z_list) / Lzero * (n**2 + l**2 + r**2)**0.5) ))
-
-def overall2(z_list, EA, DH, n, l, r):
-
-    return np.cos(np.pi * z_list / (2 * DH)) ** 4 / (n**2 + l**2 + r**2)**0.25 * np.exp(-z_list) / Lzero
-
-def real1(z_list, EA, DH, n, l, r):
-
-    return np.cos(z_list * EA) * np.cos(2 * np.pi * np.exp(-z_list) * (n**2 + l**2 + r**2)**0.5 / Lzero )
-
-def real2(z_list, EA, DH, n, l, r):
-
-    return np.sin(z_list * EA) * np.sin(2 * np.pi * np.exp(-z_list) / Lzero * (n**2 + l**2 + r**2)**0.5)
-
-def imag1(z_list, EA, DH, n, l, r):
-
-    return np.cos(z_list * EA) * np.sin(2 * np.pi * np.exp(-z_list) / Lzero * (n**2 + l**2 + r**2)**0.5)
-
-def imag2(z_list, EA, DH, n, l, r):
-
-    return np.sin(z_list * EA) * np.cos(2 * np.pi * np.exp(-z_list) / Lzero * (n**2 + l**2 + r**2)**0.5)
-
-def integration_real2(z_list, EA, DH, n, l, r):
-
-    return cumtrapz(overall2(z_list, EA, DH, n, l, r) * (real1(z_list, EA, DH, n, l, r) + real2(z_list, EA, DH, n, l, r) ), z_list)[-1]
-
-def integration_imag2(z_list, EA, DH, n, l, r):
-
-    return cumtrapz(overall2(z_list, EA, DH, n, l, r) * (imag1(z_list, EA, DH, n, l, r) - imag2(z_list, EA, DH, n, l, r) ), z_list)[-1]
         
 def plot(Y, X, f_array, elev, azim, output_name):
 
