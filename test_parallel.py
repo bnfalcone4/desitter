@@ -1,15 +1,14 @@
 from multiprocessing import Pool, get_context
 
 
-def return_x(x):
+def return_x(x,y):
 
 	return x
 
-x_list = list(range(2))
+x_list = [(x,x) for x in range(100)]
+args = x_list
 
-args = [x_list]
-
-with get_context("spawn").Pool(8) as p:
+with Pool(8) as p:
 
     extended = p.starmap(return_x, args)
 
