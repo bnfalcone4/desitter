@@ -1,20 +1,20 @@
 from multiprocessing import Pool, get_context
 
 
-def return_x(x):
+def return_x(x, y):
 
     suma = 0
 
-    for i in range(100):
-        for j in range(100):
-            for k in range(100):
+    for i in range(200):
+        for j in range(200):
+            for k in range(200):
                 suma += i+j+k
 
     return suma
 
-if __name__ == 'name':
+if __name__ == '__main__':
 
-    x_list = [(x) for x in range(100)]
+    x_list = [(x, x) for x in range(100)]
     args = x_list
     print(x_list)
 
