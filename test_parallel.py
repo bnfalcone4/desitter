@@ -1,3 +1,5 @@
+import argparse
+
 from multiprocessing import Pool, get_context
 
 
@@ -14,12 +16,23 @@ def return_x(x, y):
 
 if __name__ == '__main__':
 
-    x_list = [(x, x) for x in range(100)]
-    args = x_list
-    print(x_list)
+    parser = argparse.ArgumentParser(description='Run paralle test')
 
-    with Pool(8) as p:
+    # required arguments
+    parser.add_argument('-p','--parallel', type=int, help='Number of cpus', required=True)
 
-        extended = p.starmap(return_x, args)
+    args = parser.parse_args()
+
+    x_list = [(x) for x in range(100)]
+
+    if args.parallel == 1:
+
+        extended = [return_x(x, x) for x in x_list]
+
+    else:
+
+        with Pool(args.parallel) as p:
+
+            extended = p.starmap(return_x, x_list)
 
     print(extended)
